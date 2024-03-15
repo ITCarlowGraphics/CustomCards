@@ -1,6 +1,6 @@
 {
   "name": "com.lukaskmitas_unity.customcard",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "displayName": "CustomCard",
   "description": "Package for custom card",
   "unity": "2022.3"
