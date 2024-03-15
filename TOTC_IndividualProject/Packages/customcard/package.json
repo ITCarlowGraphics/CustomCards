@@ -1,0 +1,7 @@
+{
+  "name": "customcard",
+  "version": "0.0.1",
+  "displayName": "CustomCard",
+  "description": "Package for custom card",
+  "unity": "2022.3"
+}
