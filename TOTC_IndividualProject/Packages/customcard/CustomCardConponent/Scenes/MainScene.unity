@@ -576,6 +576,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CC_Default_Question Card
       objectReference: {fileID: 0}
+    - target: {fileID: 6939359379118766007, guid: da1a9780b9795274bb348c20fbab99ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
