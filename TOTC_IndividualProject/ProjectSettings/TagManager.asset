@@ -8,6 +8,8 @@ TagManager:
   - Timer
   - OkayButton
   - CorrectText
+  - QuestionCard
+  - QuestionCard2
   layers:
   - Default
   - TransparentFX
