@@ -1,4 +1,3 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,9 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class Timer : MonoBehaviour
+public class CC_Timer : MonoBehaviour
 {
-    public static Timer Instance { get; private set; }
+    public static CC_Timer Instance { get; private set; }
 
     [Header("Timer")]
     public float timeForQuestion = 20.0f;
