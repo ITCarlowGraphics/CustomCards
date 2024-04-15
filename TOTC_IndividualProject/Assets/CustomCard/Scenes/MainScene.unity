@@ -491,6 +491,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: H_Theme_Question Card
       objectReference: {fileID: 0}
+    - target: {fileID: 7566795171659907735, guid: 6f77d328644a14645880c6781420aa56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8637414777567946960, guid: 6f77d328644a14645880c6781420aa56, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
