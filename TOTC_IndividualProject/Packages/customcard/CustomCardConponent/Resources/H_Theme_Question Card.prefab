@@ -2201,7 +2201,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7566795171659907735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 615e8da48f24889408d536bbbb912b34, type: 3}
+  m_Script: {fileID: 11500000, guid: 36512997ff951ba47bd9817bbd69a976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8253443852518431903
@@ -2383,7 +2383,7 @@ GameObject:
   - component: {fileID: 4275626939197088}
   - component: {fileID: 1382535836396614599}
   m_Layer: 5
-  m_Name: QuestionCardBackground
+  m_Name: Card Background
   m_TagString: QuestionCard2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2458,7 +2458,7 @@ GameObject:
   - component: {fileID: 5083021818327332291}
   - component: {fileID: 2687220286399293139}
   m_Layer: 5
-  m_Name: QuestionCardFrame
+  m_Name: Card Frame
   m_TagString: QuestionCard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

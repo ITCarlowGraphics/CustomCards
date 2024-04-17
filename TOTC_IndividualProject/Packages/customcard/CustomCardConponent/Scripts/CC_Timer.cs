@@ -56,7 +56,7 @@ public class CC_Timer : MonoBehaviour
         }
     }
 
-    public void resetTimer()
+    public void ResetTimer()
     {
         TimerIsRunning(false);
         timeForQuestion = 20;

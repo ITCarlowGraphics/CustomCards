@@ -15,7 +15,7 @@ public class QuestionCard_Customization : MonoBehaviour
         float g = green / 255f;
         float b = blue / 255f;
 
-        Transform questionCardBackgroundTransform = transform.Find("QuestionCardBackground");
+        Transform questionCardBackgroundTransform = transform.Find("Card Background");
         Transform QuestionSubjectTransform = transform.Find("QuestionSubject"); 
 
         if (questionCardBackgroundTransform != null)
