@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6837234593647413561}
   - component: {fileID: 5924532551727797375}
   - component: {fileID: 1600463175177730873}
+  - component: {fileID: 8982903344330693936}
   m_Layer: 5
   m_Name: Answer3
   m_TagString: AnswerButton
@@ -120,7 +121,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5924532551727797375}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8982903344330693936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749422767544796937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c49e7dc6a31e5a4fa38274b0e17556e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeInList: 2
 --- !u!1 &941814145868408463
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,6 +730,7 @@ GameObject:
   - component: {fileID: 9181804762502341715}
   - component: {fileID: 2609527209390627109}
   - component: {fileID: 6239218939655445932}
+  - component: {fileID: 2182111449314399683}
   m_Layer: 5
   m_Name: Answer1
   m_TagString: AnswerButton
@@ -812,7 +839,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2609527209390627109}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2182111449314399683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313929341028153900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c49e7dc6a31e5a4fa38274b0e17556e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeInList: 0
 --- !u!1 &2568714681754036495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,6 +1087,7 @@ GameObject:
   - component: {fileID: 253814965175996391}
   - component: {fileID: 5532770507005030416}
   - component: {fileID: 8915991085444828992}
+  - component: {fileID: 3471584483087078301}
   m_Layer: 5
   m_Name: Answer2
   m_TagString: AnswerButton
@@ -1143,7 +1196,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5532770507005030416}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3471584483087078301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3572753983690940915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c49e7dc6a31e5a4fa38274b0e17556e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeInList: 1
 --- !u!1 &3634653733322284670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,6 +2251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeForQuestion: 20
   timerRunning: 0
+  changeColor: 0
   timerComponent: {fileID: 8926895489573393619}
   timerText: {fileID: 2055508543623293845}
   timeoutShade: {fileID: 2568714681754036495}

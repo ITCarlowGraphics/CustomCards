@@ -12,6 +12,7 @@ public class CC_Timer : MonoBehaviour
     [Header("Timer")]
     public float timeForQuestion = 20.0f;
     public bool timerRunning = false;
+    public bool changeColor = false;
     public GameObject timerComponent;
     public TextMeshProUGUI timerText;
 
@@ -67,25 +68,28 @@ public class CC_Timer : MonoBehaviour
     {
         Color targetColor = Color.white;
 
-        if (timeForQuestion > 15)
+        if (changeColor)
         {
-            // Green to Yellow
-            targetColor = Color.Lerp(Color.yellow, Color.green, (timeForQuestion - 15) / 5);
-        }
-        else if (timeForQuestion > 10)
-        {
-            // Yellow to Orange
-            targetColor = Color.Lerp(new Color(1, 0.5f, 0), Color.yellow, (timeForQuestion - 10) / 5);
-        }
-        else if (timeForQuestion > 5)
-        {
-            // Orange to Red
-            targetColor = Color.Lerp(Color.red, new Color(1, 0.5f, 0), (timeForQuestion - 5) / 5);
-        }
-        else
-        {
-            // Red
-            targetColor = Color.red;
+            if (timeForQuestion > 15)
+            {
+                // Green to Yellow
+                targetColor = Color.Lerp(Color.yellow, Color.green, (timeForQuestion - 15) / 5);
+            }
+            else if (timeForQuestion > 10)
+            {
+                // Yellow to Orange
+                targetColor = Color.Lerp(new Color(1, 0.5f, 0), Color.yellow, (timeForQuestion - 10) / 5);
+            }
+            else if (timeForQuestion > 5)
+            {
+                // Orange to Red
+                targetColor = Color.Lerp(Color.red, new Color(1, 0.5f, 0), (timeForQuestion - 5) / 5);
+            }
+            else
+            {
+                // Red
+                targetColor = Color.red;
+            }
         }
 
         UnityEngine.UI.Image image = timerComponent.GetComponent<UnityEngine.UI.Image>();
