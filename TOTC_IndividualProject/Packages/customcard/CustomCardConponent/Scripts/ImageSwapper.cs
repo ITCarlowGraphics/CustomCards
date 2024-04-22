@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,7 @@ public class ImageSwapper : MonoBehaviour
     public Sprite image1;       // First image
     public Sprite image2;       // Second image
     public float swapInterval = 1.0f;  // Interval in seconds at which images should switch
+    public TextMeshProUGUI timerText;
 
     private Image targetImage;   // The Image component on the GameObject
     private float nextSwapTime = 0;

@@ -1279,6 +1279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeForQuestion: 20
   timerRunning: 0
+  changeColor: 1
   timerComponent: {fileID: 4605859159847578261}
   timerText: {fileID: 840620538949828445}
   timeoutShade: {fileID: 5811821341026268736}
