@@ -51,8 +51,16 @@ public class Instantiate_Card : MonoBehaviour
             instantiatedPrefab.transform.SetAsFirstSibling();
             instantiatedPrefab.transform.name = "Question Card";
 
-           
-            
+            Image backgroundImage = instantiatedPrefab.transform.Find("Card Background").GetComponent<Image>();
+            if (backgroundImage != null)
+            {
+                backgroundImage.color = backgroundColor;
+            }
+            else
+            {
+                Debug.LogError("Image component named 'Card Background' not found in the instantiated prefab to set background color!");
+            }
+
         }
         else
         {
