@@ -40,10 +40,10 @@ public class Instantiate_Card : MonoBehaviour
         }
     }
 
-    public void createCard(string cardName, string hexBackgroundColor)
+    public void createCard(string m_cardName, string m_backgroundColor)
     {
         canvas = FindObjectOfType<Canvas>();
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + cardName);
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + m_cardName);
 
         if (prefab != null && canvas != null)
         {
@@ -54,15 +54,8 @@ public class Instantiate_Card : MonoBehaviour
             Image backgroundImage = instantiatedPrefab.transform.Find("Card Background").GetComponent<Image>();
             if (backgroundImage != null)
             {
-                Color backgroundColor;
-                if (ColorUtility.TryParseHtmlString(hexBackgroundColor, out backgroundColor))
-                {
-                    backgroundImage.color = backgroundColor;
-                }
-                else
-                {
-                    Debug.LogError("Invalid hex color string!");
-                }
+                Color backgroundColor = ParseColorString(m_backgroundColor);
+                backgroundImage.color = backgroundColor;
             }
             else
             {
@@ -73,5 +66,33 @@ public class Instantiate_Card : MonoBehaviour
         {
             Debug.LogError("Prefab not found!");
         }
+    }
+
+    private Color ParseColorString(string colorString)
+    {
+        Color color = new Color(1, 1, 1); // Default to white if parsing fails
+        if (colorString.StartsWith("#"))
+        {
+            if (!ColorUtility.TryParseHtmlString(colorString, out color))
+            {
+                Debug.LogError("Invalid hex color string!");
+            }
+        }
+        else if (colorString.StartsWith("RGB", System.StringComparison.OrdinalIgnoreCase))
+        {
+            string[] parts = colorString.Substring(4, colorString.Length - 5).Split(',');
+            if (parts.Length == 3)
+            {
+                float r = float.Parse(parts[0]) / 255.0f;
+                float g = float.Parse(parts[1]) / 255.0f;
+                float b = float.Parse(parts[2]) / 255.0f;
+                color = new Color(r, g, b);
+            }
+            else
+            {
+                Debug.LogError("RGB color string is not properly formatted!");
+            }
+        }
+        return color;
     }
 }
