@@ -40,7 +40,7 @@ public class Instantiate_Card : MonoBehaviour
         }
     }
 
-    public void instantiateCard(string cardName, Color backgroundColor)
+    public void createCard(string cardName, string hexBackgroundColor)
     {
         canvas = FindObjectOfType<Canvas>();
         GameObject prefab = Resources.Load<GameObject>("Prefabs/" + cardName);
@@ -54,13 +54,20 @@ public class Instantiate_Card : MonoBehaviour
             Image backgroundImage = instantiatedPrefab.transform.Find("Card Background").GetComponent<Image>();
             if (backgroundImage != null)
             {
-                backgroundImage.color = backgroundColor;
+                Color backgroundColor;
+                if (ColorUtility.TryParseHtmlString(hexBackgroundColor, out backgroundColor))
+                {
+                    backgroundImage.color = backgroundColor;
+                }
+                else
+                {
+                    Debug.LogError("Invalid hex color string!");
+                }
             }
             else
             {
                 Debug.LogError("Image component named 'Card Background' not found in the instantiated prefab to set background color!");
             }
-
         }
         else
         {
