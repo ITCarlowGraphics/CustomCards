@@ -2437,7 +2437,7 @@ MonoBehaviour:
   image1: {fileID: 21300000, guid: d994fd6f9222a4d489040f178d1b2670, type: 3}
   image2: {fileID: 21300000, guid: ac649a41969c7af42b7e73f20e37abc6, type: 3}
   swapInterval: 1
-  timerText: {fileID: 0}
+  timerText: {fileID: 2055508543623293845}
 --- !u!1 &9132974550141664783
 GameObject:
   m_ObjectHideFlags: 0
