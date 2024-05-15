@@ -43,7 +43,7 @@ public class Instantiate_Card : MonoBehaviour
     public void createCard(string m_cardName, string m_backgroundColor)
     {
         canvas = FindObjectOfType<Canvas>();
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + m_cardName);
+        GameObject prefab = Resources.Load<GameObject>(m_cardName);
 
         if (prefab != null && canvas != null)
         {
@@ -81,6 +81,7 @@ public class Instantiate_Card : MonoBehaviour
         else if (colorString.StartsWith("RGB", System.StringComparison.OrdinalIgnoreCase))
         {
             string[] parts = colorString.Substring(4, colorString.Length - 5).Split(',');
+
             if (parts.Length == 3)
             {
                 float r = float.Parse(parts[0]) / 255.0f;
