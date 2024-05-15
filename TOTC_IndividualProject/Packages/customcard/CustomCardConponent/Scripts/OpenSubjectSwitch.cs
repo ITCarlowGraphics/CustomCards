@@ -11,6 +11,9 @@ public class OpenSubjectSwitch : MonoBehaviour
         switchSubject = GameObject.Find("SwitchSubjectPanel");
     }
 
+    /// <summary>
+    /// opens the switch subject panel
+    /// </summary>
     public void ActivateSwitchSubject()
     {
         if (attemptsText != null && !attemptsText.text.StartsWith("0/"))

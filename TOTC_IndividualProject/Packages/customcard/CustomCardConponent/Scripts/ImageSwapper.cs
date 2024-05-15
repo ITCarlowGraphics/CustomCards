@@ -28,7 +28,9 @@ public class ImageSwapper : MonoBehaviour
     void Update()
     {
         if (CC_Timer.Instance == null || !CC_Timer.Instance.timerRunning)
+        {
             return;
+        }
 
         if (Time.time >= nextSwapTime)
         {
@@ -37,11 +39,20 @@ public class ImageSwapper : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// swaps between 2 images
+    /// </summary>
     private void SwapImage()
     {
         if (targetImage.sprite == image1)
+        {
             targetImage.sprite = image2;
+            timerText.gameObject.SetActive(false);
+        }
         else
+        {
             targetImage.sprite = image1;
+            timerText.gameObject.SetActive(true);
+        }
     }
 }
