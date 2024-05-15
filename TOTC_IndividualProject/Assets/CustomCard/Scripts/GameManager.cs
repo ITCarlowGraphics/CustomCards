@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         //RGB,255,100,255,
         //#1949c2
 
-        Instantiate_Card.Instance.createCard("CC_Default_Question Card", "RGB,0,0,0,", "#ffffff", "Nunito", "#4CF4FF", "AIW");
+        Instantiate_Card.Instance.createCard("CC_Default_Question Card", "RGB,0,0,0,", "#ffffff", "Nunito", "#4CF4FF", "AIW", "#7FB93D", "Nunito");
 
     }
 }
