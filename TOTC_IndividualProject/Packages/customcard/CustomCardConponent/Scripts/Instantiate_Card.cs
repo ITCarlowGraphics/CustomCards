@@ -44,7 +44,7 @@ public class Instantiate_Card : MonoBehaviour
     /// </summary>
     /// <param name="m_cardName"></param>
     /// <param name="m_backgroundColor"></param>
-    public void createCard(string m_cardName, string m_backgroundColor, string m_subjectTextColor, string m_subjectFontName)
+    public void createCard(string m_cardName, string m_backgroundColor, string m_subjectTextColor, string m_subjectFontName, string m_questionTextColor, string m_questionTextFontName)
     {
         canvas = FindObjectOfType<Canvas>();
         GameObject prefab = Resources.Load<GameObject>($"Prefabs/{m_cardName}");
@@ -63,6 +63,11 @@ public class Instantiate_Card : MonoBehaviour
             TextMeshProUGUI textComponent = instantiatedPrefab.transform.Find("QuestionSubject").GetComponent<TextMeshProUGUI>();
             changeTextColor(textComponent, m_subjectTextColor);
             changeFont(textComponent, m_subjectFontName);
+
+            // Change question text properties
+            TextMeshProUGUI questionTextComponent = instantiatedPrefab.transform.Find("QuestionText").GetComponent<TextMeshProUGUI>();
+            changeTextColor(questionTextComponent, m_questionTextColor);
+            changeFont(questionTextComponent, m_questionTextFontName);
         }
         else
         {
