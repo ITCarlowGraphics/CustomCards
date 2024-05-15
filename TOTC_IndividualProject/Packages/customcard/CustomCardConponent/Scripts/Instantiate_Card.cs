@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Instantiate_Card : MonoBehaviour
 {
     private static Instantiate_Card instance;
-
     Canvas canvas;
 
     public static Instantiate_Card Instance
@@ -45,10 +44,10 @@ public class Instantiate_Card : MonoBehaviour
     /// </summary>
     /// <param name="m_cardName"></param>
     /// <param name="m_backgroundColor"></param>
-    public void createCard(string m_cardName, string m_backgroundColor)
+    public void createCard(string m_cardName, string m_backgroundColor, string m_subjectTextColor, string m_subjectFontName)
     {
         canvas = FindObjectOfType<Canvas>();
-        GameObject prefab = Resources.Load<GameObject>(m_cardName);
+        GameObject prefab = Resources.Load<GameObject>($"Prefabs/{m_cardName}");
 
         if (prefab != null && canvas != null)
         {
@@ -56,20 +55,64 @@ public class Instantiate_Card : MonoBehaviour
             instantiatedPrefab.transform.SetAsFirstSibling();
             instantiatedPrefab.transform.name = "Question Card";
 
+            // Change background color
             Image backgroundImage = instantiatedPrefab.transform.Find("Card Background").GetComponent<Image>();
-            if (backgroundImage != null)
-            {
-                Color backgroundColor = ParseColorString(m_backgroundColor);
-                backgroundImage.color = backgroundColor;
-            }
-            else
-            {
-                Debug.LogError("Image component named 'Card Background' not found in the instantiated prefab to set background color!");
-            }
+            backGroundColorChange(backgroundImage, m_backgroundColor);
+
+            // Change subject text properties
+            TextMeshProUGUI textComponent = instantiatedPrefab.transform.Find("QuestionSubject").GetComponent<TextMeshProUGUI>();
+            changeTextColor(textComponent, m_subjectTextColor);
+            changeFont(textComponent, m_subjectFontName);
         }
         else
         {
             Debug.LogError("Prefab not found!");
+        }
+    }
+
+    private void backGroundColorChange(Image backgroundImage, string m_backgroundColor)
+    {
+        if (backgroundImage != null)
+        {
+            Color backgroundColor = ParseColorString(m_backgroundColor);
+            backgroundImage.color = backgroundColor;
+        }
+        else
+        {
+            Debug.LogError("Image component named 'Card Background' not found in the instantiated prefab to set background color!");
+        }
+    }
+
+    private void changeTextColor(TextMeshProUGUI textComponent, string m_textColor)
+    {
+        if (textComponent != null)
+        {
+            Color textColor = ParseColorString(m_textColor);
+            textComponent.color = textColor;
+        }
+        else
+        {
+            Debug.LogError("TextMeshProUGUI component named 'Card Text' not found in the instantiated prefab to set text color!");
+        }
+    }
+
+    private void changeFont(TextMeshProUGUI textComponent, string m_fontName)
+    {
+        if (textComponent != null)
+        {
+            TMP_FontAsset font = Resources.Load<TMP_FontAsset>($"Fonts/{m_fontName}");
+            if (font != null)
+            {
+                textComponent.font = font;
+            }
+            else
+            {
+                Debug.LogError($"Font '{m_fontName}' not found in Resources!");
+            }
+        }
+        else
+        {
+            Debug.LogError("TextMeshProUGUI component named 'Card Text' not found in the instantiated prefab to set font!");
         }
     }
 
