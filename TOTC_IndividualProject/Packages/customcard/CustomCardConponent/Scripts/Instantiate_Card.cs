@@ -40,6 +40,11 @@ public class Instantiate_Card : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Creates a custom card using multple different values
+    /// </summary>
+    /// <param name="m_cardName"></param>
+    /// <param name="m_backgroundColor"></param>
     public void createCard(string m_cardName, string m_backgroundColor)
     {
         canvas = FindObjectOfType<Canvas>();
@@ -68,6 +73,11 @@ public class Instantiate_Card : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Can choose between 2 color types but it needs to be formated correctly
+    /// </summary>
+    /// <param name="colorString"></param>
+    /// <returns></returns>
     private Color ParseColorString(string colorString)
     {
         Color color = new Color(1, 1, 1); // Default to white if parsing fails
