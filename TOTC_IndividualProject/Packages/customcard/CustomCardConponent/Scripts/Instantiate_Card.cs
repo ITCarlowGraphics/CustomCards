@@ -53,7 +53,8 @@ public class Instantiate_Card : MonoBehaviour
         string m_button1ImageName, string m_button2ImageName, string m_button3ImageName, // buttons properties
         string m_button1HighlightColor, string m_button2HighlightColor, string m_button3HighlightColor, // button highlight color
         string m_button1TextColor, string m_button2TextColor, string m_button3TextColor, // button text color
-        string m_button1FontName, string m_button2FontName, string m_button3FontName // button text font
+        string m_button1FontName, string m_button2FontName, string m_button3FontName, // button text font
+        string m_timerImageName, string m_timerTextColor, string m_timerTextFont
         )
     {
         canvas = FindObjectOfType<Canvas>();
@@ -88,6 +89,10 @@ public class Instantiate_Card : MonoBehaviour
             ChangeAnswerButtonProperties(instantiatedPrefab, "Answer1", m_button1ImageName, m_button1HighlightColor, m_button1TextColor, m_button1FontName);
             ChangeAnswerButtonProperties(instantiatedPrefab, "Answer2", m_button2ImageName, m_button2HighlightColor, m_button2TextColor, m_button2FontName);
             ChangeAnswerButtonProperties(instantiatedPrefab, "Answer3", m_button3ImageName, m_button3HighlightColor, m_button3TextColor, m_button3FontName);
+
+            // Change Timer properties
+            ChangeTimerProperties(instantiatedPrefab, "TimerPanel", m_timerImageName, m_timerTextColor, m_timerTextFont);
+
         }
         else
         {
@@ -194,6 +199,48 @@ public class Instantiate_Card : MonoBehaviour
         else
         {
             Debug.LogError($"Button '{buttonName}' not found in the instantiated prefab!");
+        }
+    }
+
+    private void ChangeTimerProperties(GameObject parent, string objectName, string imageName, string textColor, string fontName)
+    {
+        Transform objectTransform = parent.transform.Find(objectName);
+        if (objectTransform != null)
+        {
+            // Change object image
+            Image objectImage = objectTransform.GetComponent<Image>();
+            if (objectImage != null)
+            {
+                Sprite newSprite = Resources.Load<Sprite>($"Textures/{imageName}");
+                if (newSprite != null)
+                {
+                    objectImage.sprite = newSprite;
+                }
+                else
+                {
+                    Debug.LogError($"Image '{imageName}' not found in Resources/Textures!");
+                }
+            }
+            else
+            {
+                Debug.LogError($"Image component not found on object '{objectName}'!");
+            }
+
+            // Change object text properties
+            TextMeshProUGUI objectText = objectTransform.GetComponentInChildren<TextMeshProUGUI>();
+            if (objectText != null)
+            {
+                changeTextColor(objectText, textColor);
+                changeFont(objectText, fontName);
+            }
+            else
+            {
+                Debug.LogError($"TextMeshProUGUI component not found on object '{objectName}'!");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Object '{objectName}' not found in the instantiated prefab!");
         }
     }
 

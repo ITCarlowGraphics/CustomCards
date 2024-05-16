@@ -39,7 +39,8 @@ public class GameManager : MonoBehaviour
             "AnswerButton", "AnswerButton", "AnswerButton",
             "38FF00", "FF0000", "FF0000",
             "323232", "323232", "323232",
-            "Nunito", "Nunito", "Nunito"
+            "Nunito", "Nunito", "Nunito",
+            "Ellipse 12", "FFFFFF", "AIW"
             );
 
     }
