@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     {
         InstantiatePrefabInCanvas();
         //CreateCustomImage();
+        //CreateCustomText();
+        //CreateAnimation();
     }
 
     private void InstantiatePrefabInCanvas()
@@ -56,4 +58,37 @@ public class GameManager : MonoBehaviour
             "" // Image material (optional)
             );
     }
+
+    private void CreateCustomText()
+    {
+        Instantiate_Card.Instance.createText(
+            "Question Card", // Parent name
+            "CustomText", // Text name
+            "100", "100", // Position
+            "300", "300", // Size
+            "30", // Rotation
+            "THIS IS A CUSTOM TEXT!!!", // Text content
+            "#F8BA42", // Text color
+            "Nunito Bold", // Font name
+            50, // Font size
+            true, // Bold
+            false // Italic
+        );
+    }
+
+    private void CreateAnimation()
+    {
+        Instantiate_Card.Instance.createAnimatedImage(
+            "Question Card", // Parent name
+            "Bat Animation", // Animation name
+            "-370", "550", // Initial position
+            "100", "100", // Size
+            "0", // Rotation
+            "Bat", // Image source
+            "#FFFFFF", // Image color
+            2.0f, // Move speed
+            "zigzag" // Move pattern
+        );
+    }
+
 }

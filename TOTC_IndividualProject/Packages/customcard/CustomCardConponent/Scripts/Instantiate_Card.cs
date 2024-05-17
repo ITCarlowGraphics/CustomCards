@@ -108,7 +108,7 @@ public class Instantiate_Card : MonoBehaviour
 
     public void createImage(
         string parentName, // parent GameObject
-        string imageName, // image
+        string imageName, // image for the image object
         string xPosition, string yPosition, // X and Y positions
         string width, string height, // Width and height
         string rotation, // Rotation
@@ -162,6 +162,137 @@ public class Instantiate_Card : MonoBehaviour
                     Debug.LogError($"Material '{imageMaterial}' not found in Resources/Materials!");
                 }
             }
+        }
+        else
+        {
+            Debug.LogError($"Parent GameObject '{parentName}' not found!");
+        }
+    }
+
+    public void createText(
+        string parentName, // parent gameobject
+        string textName, // Name for the new text GameObject
+        string xPosition, string yPosition, // X and Y positions
+        string width, string height, // Width and height
+        string rotation, // Rotation
+        string textContent, // Text content
+        string textColor, // Text color
+        string fontName, // Font name
+        int fontSize, // Font size
+        bool isBold, // Bold text
+        bool isItalic // Italic text
+        )
+    {
+        // Find the parent GameObject
+        GameObject parent = GameObject.Find(parentName);
+        if (parent != null)
+        {
+            // Create a new GameObject for the text
+            GameObject newTextObject = new GameObject(textName);
+            newTextObject.transform.SetParent(parent.transform);
+
+            // Set RectTransform properties
+            RectTransform rectTransform = newTextObject.AddComponent<RectTransform>();
+            rectTransform.anchoredPosition = new Vector2(float.Parse(xPosition), float.Parse(yPosition));
+            rectTransform.sizeDelta = new Vector2(float.Parse(width), float.Parse(height));
+            rectTransform.localRotation = Quaternion.Euler(0, 0, float.Parse(rotation));
+
+            // Add TextMeshProUGUI component
+            TextMeshProUGUI textComponent = newTextObject.AddComponent<TextMeshProUGUI>();
+
+            // Set text content
+            textComponent.text = textContent;
+
+            // Set text color
+            Color color = ParseColorString(textColor);
+            textComponent.color = color;
+
+            // Set font
+            TMP_FontAsset font = Resources.Load<TMP_FontAsset>($"Fonts/{fontName}");
+            if (font != null)
+            {
+                textComponent.font = font;
+            }
+            else
+            {
+                Debug.LogError($"Font '{fontName}' not found in Resources/Fonts!");
+            }
+
+            // Set font size
+            textComponent.fontSize = fontSize;
+
+            // Set font style
+            if (isBold && isItalic)
+            {
+                textComponent.fontStyle = FontStyles.Bold | FontStyles.Italic;
+            }
+            else if (isBold)
+            {
+                textComponent.fontStyle = FontStyles.Bold;
+            }
+            else if (isItalic)
+            {
+                textComponent.fontStyle = FontStyles.Italic;
+            }
+            else
+            {
+                textComponent.fontStyle = FontStyles.Normal;
+            }
+        }
+        else
+        {
+            Debug.LogError($"Parent GameObject '{parentName}' not found!");
+        }
+    }
+
+    public void createAnimatedImage(
+        string parentName, // parent GameObject
+        string animationName, // Name for the new animation GameObject
+        string xPosition, string yPosition, // Initial X and Y positions
+        string width, string height, // Width and height
+        string rotation, // Rotation
+        string imageSource, // Image source (sprite name)
+        string imageColor, // Image color
+        float moveSpeed, // Movement speed
+        string movePattern // Movement pattern (e.g. linear, zigzag, circular)
+        )
+    {
+        // Find the parent GameObject
+        GameObject parent = GameObject.Find(parentName);
+        if (parent != null)
+        {
+            // Create a new GameObject for the image
+            GameObject newImageObject = new GameObject(animationName);
+            newImageObject.transform.SetParent(parent.transform);
+
+            // Set RectTransform properties
+            RectTransform rectTransform = newImageObject.AddComponent<RectTransform>();
+            rectTransform.anchoredPosition = new Vector2(float.Parse(xPosition), float.Parse(yPosition));
+            rectTransform.sizeDelta = new Vector2(float.Parse(width), float.Parse(height));
+            rectTransform.localRotation = Quaternion.Euler(0, 0, float.Parse(rotation));
+
+            // Add Image component
+            Image imageComponent = newImageObject.AddComponent<Image>();
+
+            // Set image source (sprite)
+            Sprite sprite = Resources.Load<Sprite>($"Textures/{imageSource}");
+            if (sprite != null)
+            {
+                imageComponent.sprite = sprite;
+            }
+            else
+            {
+                Debug.LogError($"Image source '{imageSource}' not found in Resources/Textures!");
+            }
+
+            // Set image color
+            Color color = ParseColorString(imageColor);
+            imageComponent.color = color;
+
+            // Add and configure animation component
+            AnimatedImage animatedImage = newImageObject.AddComponent<AnimatedImage>();
+            animatedImage.moveSpeed = moveSpeed;
+            animatedImage.movePattern = movePattern;
         }
         else
         {
