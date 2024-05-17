@@ -39,11 +39,6 @@ public class Instantiate_Card : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Creates a custom card using multple different values
-    /// </summary>
-    /// <param name="m_cardName"></param>
-    /// <param name="m_backgroundColor"></param>
     public void createCard(
         string m_cardName, // Prefab of the card
         string m_backgroundColor, // background color of the card
@@ -54,7 +49,9 @@ public class Instantiate_Card : MonoBehaviour
         string m_button1HighlightColor, string m_button2HighlightColor, string m_button3HighlightColor, // button highlight color
         string m_button1TextColor, string m_button2TextColor, string m_button3TextColor, // button text color
         string m_button1FontName, string m_button2FontName, string m_button3FontName, // button text font
-        string m_timerImageName, string m_timerTextColor, string m_timerTextFont
+        string m_timerImageName, string m_timerTextColor, string m_timerTextFont, // timer properties
+        string m_okayImageName, string m_okayTextColor, string m_okayTextFont, // Okay button properties
+        string m_switchSubjectImageName, string m_switchSubjectTextColor, string m_switchSubjectFontName // switch Subject properties
         )
     {
         canvas = FindObjectOfType<Canvas>();
@@ -91,7 +88,13 @@ public class Instantiate_Card : MonoBehaviour
             ChangeAnswerButtonProperties(instantiatedPrefab, "Answer3", m_button3ImageName, m_button3HighlightColor, m_button3TextColor, m_button3FontName);
 
             // Change Timer properties
-            ChangeTimerProperties(instantiatedPrefab, "TimerPanel", m_timerImageName, m_timerTextColor, m_timerTextFont);
+            changeTimerProperties(instantiatedPrefab, "TimerPanel", m_timerImageName, m_timerTextColor, m_timerTextFont);
+
+            // OkayButton properties
+            changeOkayButtonProperties(instantiatedPrefab, "OkayButton", m_okayImageName, m_okayTextColor, m_okayTextFont);
+
+            // Switch Subject properties
+            changeSwitchSubjectProperties(instantiatedPrefab, "Switch Subject", m_switchSubjectImageName, m_switchSubjectTextColor, m_switchSubjectFontName);
 
         }
         else
@@ -202,7 +205,7 @@ public class Instantiate_Card : MonoBehaviour
         }
     }
 
-    private void ChangeTimerProperties(GameObject parent, string objectName, string imageName, string textColor, string fontName)
+    private void changeTimerProperties(GameObject parent, string objectName, string imageName, string textColor, string fontName)
     {
         Transform objectTransform = parent.transform.Find(objectName);
         if (objectTransform != null)
@@ -236,6 +239,106 @@ public class Instantiate_Card : MonoBehaviour
             else
             {
                 Debug.LogError($"TextMeshProUGUI component not found on object '{objectName}'!");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Object '{objectName}' not found in the instantiated prefab!");
+        }
+    }
+
+    private void changeOkayButtonProperties(GameObject parent, string objectName, string imageName, string textColor, string fontName)
+    {
+        Transform objectTransform = parent.transform.Find(objectName);
+        if (objectTransform != null)
+        {
+            // Change object image
+            Image objectImage = objectTransform.GetComponent<Image>();
+            if (objectImage != null)
+            {
+                Sprite newSprite = Resources.Load<Sprite>($"Textures/{imageName}");
+                if (newSprite != null)
+                {
+                    objectImage.sprite = newSprite;
+                }
+                else
+                {
+                    Debug.LogError($"Image '{imageName}' not found in Resources/Textures!");
+                }
+            }
+            else
+            {
+                Debug.LogError($"Image component not found on object '{objectName}'!");
+            }
+
+            // Change object text properties
+            TextMeshProUGUI objectText = objectTransform.GetComponentInChildren<TextMeshProUGUI>();
+            if (objectText != null)
+            {
+                changeTextColor(objectText, textColor);
+                changeFont(objectText, fontName);
+            }
+            else
+            {
+                Debug.LogError($"TextMeshProUGUI component not found on object '{objectName}'!");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Object '{objectName}' not found in the instantiated prefab!");
+        }
+    }
+
+    private void changeSwitchSubjectProperties(GameObject parent, string objectName, string imageName, string textColor, string fontName)
+    {
+        Transform switchSubjectTransform = parent.transform.Find(objectName);
+        if (switchSubjectTransform != null)
+        {
+            // Change the image of "ss Icon"
+            Transform ssIconTransform = switchSubjectTransform.Find("ss Icon");
+            if (ssIconTransform != null)
+            {
+                Image ssIconImage = ssIconTransform.GetComponent<Image>();
+                if (ssIconImage != null)
+                {
+                    Sprite newSprite = Resources.Load<Sprite>($"Textures/{imageName}");
+                    if (newSprite != null)
+                    {
+                        ssIconImage.sprite = newSprite;
+                    }
+                    else
+                    {
+                        Debug.LogError($"Image '{imageName}' not found in Resources/Textures!");
+                    }
+                }
+                else
+                {
+                    Debug.LogError($"Image component not found on 'ss Icon'!");
+                }
+            }
+            else
+            {
+                Debug.LogError($"'ss Icon' not found under '{objectName}'!");
+            }
+
+            // Change the text properties of "ss Text"
+            Transform ssTextTransform = switchSubjectTransform.Find("ss Text");
+            if (ssTextTransform != null)
+            {
+                TextMeshProUGUI ssTextComponent = ssTextTransform.GetComponent<TextMeshProUGUI>();
+                if (ssTextComponent != null)
+                {
+                    changeTextColor(ssTextComponent, textColor);
+                    changeFont(ssTextComponent, fontName);
+                }
+                else
+                {
+                    Debug.LogError($"TextMeshProUGUI component not found on 'ss Text'!");
+                }
+            }
+            else
+            {
+                Debug.LogError($"'ss Text' not found under '{objectName}'!");
             }
         }
         else
