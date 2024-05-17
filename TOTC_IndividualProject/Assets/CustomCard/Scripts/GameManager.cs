@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         InstantiatePrefabInCanvas();
+        //CreateCustomImage();
     }
 
     private void InstantiatePrefabInCanvas()
@@ -25,20 +26,34 @@ public class GameManager : MonoBehaviour
         //#1949c2
 
         Instantiate_Card.Instance.createCard(
-            "CC_Default_Question Card",
-             "1",
-            "RGB,0,0,0,",
-            "#ffffff", "Nunito Bold",
-            "#4CF4FF", "Nunito Bold",
-            "#7FB93D", "Nunito Bold",
-            "AnswerButton", "AnswerButton", "AnswerButton",
-            "#38FF00", "#FF0000", "#FF0000",
-            "#323232", "#323232", "#323232",
-            "Nunito Bold", "Nunito Bold", "Nunito Bold",
-            "Ellipse 12", "#FFFFFF", "Nunito Bold",
-            "Rectangle_383", "#323232", "Nunito Bold",
-            "Vector", "#88FFF1", "Nunito Bold"
+            "CC_Default_Question Card", // Name of preset card
+             "1", // Layout
+            "RGB,0,0,0,", // Background color
+            "#ffffff", "Nunito Bold", // Subject text
+            "#4CF4FF", "Nunito Bold", // Question text
+            "#7FB93D", "Nunito Bold", // Correct text
+            "AnswerButton", "AnswerButton", "AnswerButton", // Answer button image
+            "#38FF00", "#FF0000", "#FF0000", // Answer button highlight color
+            "#323232", "#323232", "#323232", // Answer button text color
+            "Nunito Bold", "Nunito Bold", "Nunito Bold", // Answer button font 
+            "Ellipse 12", "#FFFFFF", "Nunito Bold", // Timer properties
+            "Rectangle_383", "#323232", "Nunito Bold", // okay button prperties
+            "Vector", "#88FFF1", "Nunito Bold" // switch subject properties
             );
 
+    }
+
+    private void CreateCustomImage()
+    {
+        Instantiate_Card.Instance.createImage(
+            "Question Card", // Parent name
+            "CustomImage", // Image name
+            "0", "200", // Position
+            "400", "120", // Size
+            "0", // Rotation
+            "Rectangle 424", // Image source
+            "#FFFFFF", // Image color
+            "" // Image material (optional)
+            );
     }
 }

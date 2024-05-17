@@ -106,6 +106,69 @@ public class Instantiate_Card : MonoBehaviour
         }
     }
 
+    public void createImage(
+        string parentName, // parent GameObject
+        string imageName, // image
+        string xPosition, string yPosition, // X and Y positions
+        string width, string height, // Width and height
+        string rotation, // Rotation
+        string imageSource, // Image source (sprite name)
+        string imageColor, // Image color
+        string imageMaterial // Image material (optional)
+        )
+    {
+        // Find the parent GameObject
+        GameObject parent = GameObject.Find(parentName);
+        if (parent != null)
+        {
+            // Create a new GameObject for the image
+            GameObject newImageObject = new GameObject(imageName);
+            newImageObject.transform.SetParent(parent.transform);
+
+            // Set RectTransform properties
+            RectTransform rectTransform = newImageObject.AddComponent<RectTransform>();
+            rectTransform.anchoredPosition = new Vector2(float.Parse(xPosition), float.Parse(yPosition));
+            rectTransform.sizeDelta = new Vector2(float.Parse(width), float.Parse(height));
+            rectTransform.localRotation = Quaternion.Euler(0, 0, float.Parse(rotation));
+
+            // Add Image component
+            Image imageComponent = newImageObject.AddComponent<Image>();
+
+            // Set image source (sprite)
+            Sprite sprite = Resources.Load<Sprite>($"Textures/{imageSource}");
+            if (sprite != null)
+            {
+                imageComponent.sprite = sprite;
+            }
+            else
+            {
+                Debug.LogError($"Image source '{imageSource}' not found in Resources/Textures!");
+            }
+
+            // Set image color
+            Color color = ParseColorString(imageColor);
+            imageComponent.color = color;
+
+            // Set image material (optional)
+            if (!string.IsNullOrEmpty(imageMaterial))
+            {
+                Material material = Resources.Load<Material>($"Materials/{imageMaterial}");
+                if (material != null)
+                {
+                    imageComponent.material = material;
+                }
+                else
+                {
+                    Debug.LogError($"Material '{imageMaterial}' not found in Resources/Materials!");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError($"Parent GameObject '{parentName}' not found!");
+        }
+    }
+
     private void backGroundColorChange(Image backgroundImage, string m_backgroundColor)
     {
         if (backgroundImage != null)
@@ -393,12 +456,12 @@ public class Instantiate_Card : MonoBehaviour
                 break;
             case "2":
                 // Custom layout 2
-                SetPosition(parent, "QuestionSubject", new Vector2(0, 1100));
-                SetPosition(parent, "QuestionText", new Vector2(0, 860));
-                SetPosition(parent, "CorrectText", new Vector2(0, -900));
-                SetPosition(parent, "TimerPanel", new Vector2(0, 500));
-                SetPosition(parent, "OkayButton", new Vector2(0, -1080));
-                SetPosition(parent, "Switch Subject", new Vector2(0, 200));
+                SetTransform(parent, "QuestionSubject", new Vector2(0, 1100));
+                SetTransform(parent, "QuestionText", new Vector2(0, 860));
+                SetTransform(parent, "CorrectText", new Vector2(0, -900));
+                SetTransform(parent, "TimerPanel", new Vector2(0, 500));
+                SetTransform(parent, "OkayButton", new Vector2(0, -1080));
+                SetTransform(parent, "Switch Subject", new Vector2(0, 200));
                 break;
             case "3":
                 // Custom layout 3
@@ -415,19 +478,6 @@ public class Instantiate_Card : MonoBehaviour
             default:
                 Debug.LogWarning("Invalid layout mode");
                 break;
-        }
-    }
-
-    private void SetPosition(GameObject parent, string objectName, Vector2 newPosition)
-    {
-        Transform objTransform = parent.transform.Find(objectName);
-        if (objTransform != null)
-        {
-            objTransform.localPosition = newPosition;
-        }
-        else
-        {
-            Debug.LogError($"Object '{objectName}' not found in the instantiated prefab!");
         }
     }
 
