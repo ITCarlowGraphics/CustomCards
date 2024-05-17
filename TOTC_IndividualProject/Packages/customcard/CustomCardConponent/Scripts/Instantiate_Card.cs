@@ -41,6 +41,7 @@ public class Instantiate_Card : MonoBehaviour
 
     public void createCard(
         string m_cardName, // Prefab of the card
+        string layoutMode, // Layout changes
         string m_backgroundColor, // background color of the card
         string m_subjectTextColor, string m_subjectFontName, // subject text properties
         string m_questionTextColor, string m_questionTextFontName, // question text properties
@@ -96,6 +97,8 @@ public class Instantiate_Card : MonoBehaviour
             // Switch Subject properties
             changeSwitchSubjectProperties(instantiatedPrefab, "Switch Subject", m_switchSubjectImageName, m_switchSubjectTextColor, m_switchSubjectFontName);
 
+            // Apply layout changes based on mode
+            layoutChanges(instantiatedPrefab, layoutMode);
         }
         else
         {
@@ -380,4 +383,83 @@ public class Instantiate_Card : MonoBehaviour
         }
         return color;
     }
+
+    private void layoutChanges(GameObject parent, string layoutMode)
+    {
+        switch (layoutMode)
+        {
+            case "1":
+                // Default layout, no changes needed
+                break;
+            case "2":
+                // Custom layout 2
+                SetPosition(parent, "QuestionSubject", new Vector2(0, 1100));
+                SetPosition(parent, "QuestionText", new Vector2(0, 860));
+                SetPosition(parent, "CorrectText", new Vector2(0, -900));
+                SetPosition(parent, "TimerPanel", new Vector2(0, 500));
+                SetPosition(parent, "OkayButton", new Vector2(0, -1080));
+                SetPosition(parent, "Switch Subject", new Vector2(0, 200));
+                break;
+            case "3":
+                // Custom layout 3
+                SetTransform(parent, "QuestionSubject", new Vector2(0, 370), new Vector3(1.5f, 1.5f, 1));
+                SetTransform(parent, "QuestionText", new Vector2(280, -130), width: 60, height: 450);
+                SetTransform(parent, "CorrectText", new Vector2(0, 600));
+                SetTransform(parent, "TimerPanel", new Vector2(-200, 1000));
+                SetTransform(parent, "OkayButton", new Vector2(0, -1080), new Vector3(1.2f, 1.2f, 1));
+                SetTransform(parent, "Switch Subject", new Vector2(350, 1000), new Vector3(1.5f, 1.5f, 1));
+                SetTransform(parent, "Answer1", new Vector2(-200, 120), new Vector3(0.8f, 0.8f, 1));
+                SetTransform(parent, "Answer2", new Vector2(-200, -100), new Vector3(0.8f, 0.8f, 1));
+                SetTransform(parent, "Answer3", new Vector2(-200, -315), new Vector3(0.8f, 0.8f, 1));
+                break;
+            default:
+                Debug.LogWarning("Invalid layout mode");
+                break;
+        }
+    }
+
+    private void SetPosition(GameObject parent, string objectName, Vector2 newPosition)
+    {
+        Transform objTransform = parent.transform.Find(objectName);
+        if (objTransform != null)
+        {
+            objTransform.localPosition = newPosition;
+        }
+        else
+        {
+            Debug.LogError($"Object '{objectName}' not found in the instantiated prefab!");
+        }
+    }
+
+    private void SetTransform(GameObject parent, string objectName, Vector2 newPosition, Vector3? newScale = null, float width = -1, float height = -1)
+    {
+        Transform objTransform = parent.transform.Find(objectName);
+        if (objTransform != null)
+        {
+            objTransform.localPosition = newPosition;
+
+            if (newScale.HasValue)
+            {
+                objTransform.localScale = newScale.Value;
+            }
+
+            RectTransform rectTransform = objTransform.GetComponent<RectTransform>();
+            if (rectTransform != null)
+            {
+                if (width > 0)
+                {
+                    rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
+                }
+                if (height > 0)
+                {
+                    rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError($"Object '{objectName}' not found in the instantiated prefab!");
+        }
+    }
+
 }

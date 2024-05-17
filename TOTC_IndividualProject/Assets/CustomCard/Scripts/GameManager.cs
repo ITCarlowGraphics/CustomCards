@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+  
     void Start()
     {
         InstantiatePrefabInCanvas();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void InstantiatePrefabInCanvas()
@@ -32,6 +26,7 @@ public class GameManager : MonoBehaviour
 
         Instantiate_Card.Instance.createCard(
             "CC_Default_Question Card",
+             "1",
             "RGB,0,0,0,",
             "#ffffff", "Nunito Bold",
             "#4CF4FF", "Nunito Bold",
