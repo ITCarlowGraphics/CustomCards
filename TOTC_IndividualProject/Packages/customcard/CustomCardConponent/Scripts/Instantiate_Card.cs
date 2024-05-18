@@ -366,7 +366,7 @@ public class Instantiate_Card : MonoBehaviour
         if (clip != null)
         {
             audioSource.clip = clip;
-            button.onClick.AddListener(() => PlayButtonSound(audioSource));
+            PlayButtonSound(audioSource);
         }
         else
         {
