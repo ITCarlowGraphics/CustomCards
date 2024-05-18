@@ -359,6 +359,26 @@ public class Instantiate_Card : MonoBehaviour
         }
     }
 
+    public void AddButtonSound(Button button, string soundName)
+    {
+        AudioSource audioSource = button.gameObject.AddComponent<AudioSource>();
+        AudioClip clip = Resources.Load<AudioClip>($"Sounds/{soundName}");
+        if (clip != null)
+        {
+            audioSource.clip = clip;
+            button.onClick.AddListener(() => PlayButtonSound(audioSource));
+        }
+        else
+        {
+            Debug.LogError($"Sound '{soundName}' not found in Resources/Sounds!");
+        }
+    }
+
+    private void PlayButtonSound(AudioSource audioSource)
+    {
+        audioSource.Play();
+    }
+
     private void backGroundColorChange(Image backgroundImage, string m_backgroundColor)
     {
         if (backgroundImage != null)

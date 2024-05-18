@@ -22,6 +22,7 @@ public class CC_Timer : MonoBehaviour
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip startSound;
+    public float playSoundAt = 20.0f;
 
     private void Awake()
     {
@@ -38,6 +39,26 @@ public class CC_Timer : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (timerRunning)
+        {
+            timeForQuestion -= Time.deltaTime;
+            TimerUpdate();
+
+            if (timeForQuestion <= (playSoundAt + 1.0f) && !audioSource.isPlaying)
+            {
+                PlaySound(true);
+            }
+
+            if (timeForQuestion <= 0)
+            {
+                timerRunning = false;
+                TimesUp();
+            }
+        }
+    }
+
     public void ShowTimer(bool showTimer)
     {
         timerComponent.SetActive(showTimer);
@@ -46,6 +67,7 @@ public class CC_Timer : MonoBehaviour
     public void TimerUpdate()
     {
         timerText.text = ((int)timeForQuestion).ToString();
+        UpdateTimerColorAndText();
     }
 
     public void TimerIsRunning(bool running)
@@ -62,6 +84,7 @@ public class CC_Timer : MonoBehaviour
         TimerIsRunning(false);
         timeForQuestion = 20;
         UpdateTimerColorAndText();
+        PlaySound(false);
     }
 
     public void UpdateTimerColorAndText()
@@ -101,10 +124,12 @@ public class CC_Timer : MonoBehaviour
         if (play)
         {
             audioSource.PlayOneShot(startSound);
+            Debug.Log("Sound is playing");
         }
         else
         {
             audioSource.Stop();
+            Debug.Log("Sound is stopped");
         }
     }
 
@@ -130,3 +155,4 @@ public class CC_Timer : MonoBehaviour
         }
     }
 }
+
