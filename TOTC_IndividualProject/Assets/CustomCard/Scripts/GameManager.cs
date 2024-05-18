@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
         //CreateCustomImage();
         //CreateCustomText();
         //CreateAnimation();
-        //SetupTimerSound();
+        SetupTimerSound();
     }
 
     private void InstantiatePrefabInCanvas()

@@ -43,19 +43,14 @@ public class CC_Timer : MonoBehaviour
     {
         if (timerRunning)
         {
-            timeForQuestion -= Time.deltaTime;
-            TimerUpdate();
-
             if (timeForQuestion <= (playSoundAt + 1.0f) && !audioSource.isPlaying)
             {
                 PlaySound(true);
             }
-
-            if (timeForQuestion <= 0)
-            {
-                timerRunning = false;
-                TimesUp();
-            }
+        }
+        if (timeForQuestion <= 0)
+        {
+            TimesUp();
         }
     }
 
