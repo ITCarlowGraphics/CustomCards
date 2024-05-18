@@ -67,7 +67,7 @@ public class CC_Timer : MonoBehaviour
     public void TimerUpdate()
     {
         timerText.text = ((int)timeForQuestion).ToString();
-        UpdateTimerColorAndText();
+        UpdateTimerColor();
     }
 
     public void TimerIsRunning(bool running)
@@ -83,11 +83,14 @@ public class CC_Timer : MonoBehaviour
     {
         TimerIsRunning(false);
         timeForQuestion = 20;
-        UpdateTimerColorAndText();
+        UpdateTimerColor();
         PlaySound(false);
     }
 
-    public void UpdateTimerColorAndText()
+    /// <summary>
+    /// changes color for the timer UI
+    /// </summary>
+    public void UpdateTimerColor()
     {
         Color targetColor = Color.white;
 
@@ -119,6 +122,10 @@ public class CC_Timer : MonoBehaviour
         image.color = targetColor;
     }
 
+    /// <summary>
+    /// plays the sound
+    /// </summary>
+    /// <param name="play"></param>
     public void PlaySound(bool play)
     {
         if (play)
@@ -142,6 +149,10 @@ public class CC_Timer : MonoBehaviour
         PlaySound(false);
     }
 
+    /// <summary>
+    /// loads the sound from resources
+    /// </summary>
+    /// <param name="soundName"></param>
     public void LoadSoundFromResources(string soundName)
     {
         AudioClip clip = Resources.Load<AudioClip>($"Sounds/{soundName}");
