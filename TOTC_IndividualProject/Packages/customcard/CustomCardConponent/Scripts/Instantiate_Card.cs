@@ -300,6 +300,65 @@ public class Instantiate_Card : MonoBehaviour
         }
     }
 
+    public void createAnimation(
+        string parentName, // parent GameObject
+        string animationName, // animation name
+        string xPosition, string yPosition, // Initial X and Y positions
+        string width, string height, // Width and height
+        string rotation, // Initial rotation
+        string imageSource, // Image source
+        string imageColor, // Image color
+        float moveSpeed, // Movement speed
+        string movePattern, // Movement pattern (e.g. "zigzag", "vertical", "horizontal", "jumpscare")
+        int quantity // Number of entities to create
+        )
+    {
+        // Find the parent GameObject
+        GameObject parent = GameObject.Find(parentName);
+        if (parent != null)
+        {
+            for (int i = 0; i < quantity; i++)
+            {
+                // Create a new GameObject for each image
+                GameObject newImageObject = new GameObject($"{animationName}_{i}");
+                newImageObject.transform.SetParent(parent.transform);
+
+                // Set RectTransform properties
+                RectTransform rectTransform = newImageObject.AddComponent<RectTransform>();
+                rectTransform.anchoredPosition = new Vector2(float.Parse(xPosition) + i * 150, float.Parse(yPosition)); // Offset each instance slightly
+                rectTransform.sizeDelta = new Vector2(float.Parse(width), float.Parse(height));
+                rectTransform.localRotation = Quaternion.Euler(0, 0, float.Parse(rotation));
+
+                // Add Image component
+                Image imageComponent = newImageObject.AddComponent<Image>();
+
+                // Set image source (sprite)
+                Sprite sprite = Resources.Load<Sprite>($"Textures/{imageSource}");
+                if (sprite != null)
+                {
+                    imageComponent.sprite = sprite;
+                }
+                else
+                {
+                    Debug.LogError($"Image source '{imageSource}' not found in Resources/Textures!");
+                }
+
+                // Set image color
+                Color color = ParseColorString(imageColor);
+                imageComponent.color = color;
+
+                // Add and configure animation component
+                AnimatedImage animatedImage = newImageObject.AddComponent<AnimatedImage>();
+                animatedImage.moveSpeed = moveSpeed;
+                animatedImage.movePattern = movePattern;
+            }
+        }
+        else
+        {
+            Debug.LogError($"Parent GameObject '{parentName}' not found!");
+        }
+    }
+
     private void backGroundColorChange(Image backgroundImage, string m_backgroundColor)
     {
         if (backgroundImage != null)

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
         //CreateCustomImage();
         //CreateCustomText();
         //CreateAnimation();
+        //SetupTimerSound();
     }
 
     private void InstantiatePrefabInCanvas()
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
         // Can choose between 2 colors RGB and HEX code, demonstration below it needs to be that format
         //RGB,255,100,255,
         //#1949c2
+        //Fonts - Nunito Bold, AIW
 
         Instantiate_Card.Instance.createCard(
             "CC_Default_Question Card", // Name of preset card
@@ -78,17 +80,95 @@ public class GameManager : MonoBehaviour
 
     private void CreateAnimation()
     {
-        Instantiate_Card.Instance.createAnimatedImage(
+        // Create animation with zigzag movement goes up and down
+        Instantiate_Card.Instance.createAnimation(
             "Question Card", // Parent name
-            "Bat Animation", // Animation name
-            "-370", "550", // Initial position
+            "zig zag animation", // animation name
+            "-350", "500", // Initial position
+            "100", "100", // Size
+            "0", // Rotation
+            "Bat", // Image source
+            "#FFFFFF", // Image color
+            3.0f, // Move speed
+            "zigzag", // Move pattern
+            1 // Quantity
+        );
+
+        // Create an animation with vertical movement
+        Instantiate_Card.Instance.createAnimation(
+            "Question Card", // Parent name
+            "Vertical animation", // animation name
+            "200", "500", // Initial position
+            "100", "100", // Size
+            "3", // Rotation
+            "Bat", // Image source
+            "#FFFFFF", // Image color
+            4.0f, // Move speed
+            "vertical", // Move pattern
+            2 // Quantity
+        );
+
+        // Create an animation with horizontal movement
+        Instantiate_Card.Instance.createAnimation(
+            "Question Card", // Parent name
+            "Horizontal animation", // animation name
+            "0", "300", // Initial position
+            "100", "100", // Size
+            "-10", // Rotation
+            "Bat", // Image source
+            "#FFFFFF", // Image color
+            3.5f, // Move speed
+            "horizontal", // Move pattern
+            1 // Quantity
+        );
+
+        // Create an animation with Circular movement
+        Instantiate_Card.Instance.createAnimation(
+            "Question Card", // Parent name
+            "Circuly animation", // animation name
+            "250", "300", // Initial position
+            "100", "100", // Size
+            "-10", // Rotation
+            "Bat", // Image source
+            "#FFFFFF", // Image color
+            2.0f, // Move speed
+            "circular", // Move pattern
+            2 // Quantity
+        );
+
+        // Create an animation with scaling effect
+        Instantiate_Card.Instance.createAnimation(
+            "Question Card", // Parent name
+            "Scaling animation", // animation name
+            "0", "200", // Initial position
             "100", "100", // Size
             "0", // Rotation
             "Bat", // Image source
             "#FFFFFF", // Image color
             2.0f, // Move speed
-            "zigzag" // Move pattern
+            "scale", // Move pattern
+            1 // Quantity
         );
+
+        // Create an animation with jump scare effect
+        Instantiate_Card.Instance.createAnimation(
+            "Question Card", // Parent name
+            "JumpScare animation", // animation name
+            "0", "0", // Initial position
+            "100", "100", // Size
+            "0", // Rotation
+            "Bat", // Image source
+            "#FFFFFF", // Image color
+            1.0f, // Move speed
+            "jumpscare", // Move pattern
+            1 // Quantity
+        );
+    }
+
+    private void SetupTimerSound()
+    {
+        CC_Timer.Instance.LoadSoundFromResources("20-second-timer-v3");
+        CC_Timer.Instance.PlaySound(true);
     }
 
 }

@@ -45,13 +45,13 @@ public class CC_Timer : MonoBehaviour
 
     public void TimerUpdate()
     {
-        timerText.text = ((int)timeForQuestion).ToString();   
+        timerText.text = ((int)timeForQuestion).ToString();
     }
 
     public void TimerIsRunning(bool running)
     {
         timerRunning = running;
-        if(running)
+        if (running)
         {
             timeoutShade.SetActive(false);
         }
@@ -102,7 +102,7 @@ public class CC_Timer : MonoBehaviour
         {
             audioSource.PlayOneShot(startSound);
         }
-        else 
+        else
         {
             audioSource.Stop();
         }
@@ -115,5 +115,18 @@ public class CC_Timer : MonoBehaviour
             timeoutShade.SetActive(true);
         }
         PlaySound(false);
+    }
+
+    public void LoadSoundFromResources(string soundName)
+    {
+        AudioClip clip = Resources.Load<AudioClip>($"Sounds/{soundName}");
+        if (clip != null)
+        {
+            startSound = clip;
+        }
+        else
+        {
+            Debug.LogError($"Sound '{soundName}' not found in Resources/Sounds!");
+        }
     }
 }

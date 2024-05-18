@@ -1127,7 +1127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2700885818184662478}
-  - component: {fileID: 2703867881773906523}
+  - component: {fileID: 1690921355086068425}
   - component: {fileID: 4394808567886796898}
   - component: {fileID: 628245787403776389}
   m_Layer: 5
@@ -1169,7 +1169,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!82 &2703867881773906523
+--- !u!82 &1690921355086068425
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1180,7 +1180,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1283,7 +1283,7 @@ MonoBehaviour:
   timerComponent: {fileID: 4605859159847578261}
   timerText: {fileID: 840620538949828445}
   timeoutShade: {fileID: 5811821341026268736}
-  audioSource: {fileID: 2703867881773906523}
+  audioSource: {fileID: 1690921355086068425}
   startSound: {fileID: 8300000, guid: d1a76b04502da8d458a3550d3346f921, type: 3}
 --- !u!114 &628245787403776389
 MonoBehaviour:
