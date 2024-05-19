@@ -41,6 +41,23 @@ public class CC_Timer : MonoBehaviour
 
     private void Update()
     {
+        // For other use
+
+        //if (timerRunning)
+        //{
+        //    timeForQuestion -= Time.deltaTime;
+        //    TimerUpdate();
+        //    if (timeForQuestion <= playSoundAt && !audioSource.isPlaying)
+        //    {
+        //        PlaySound(true);
+        //    }
+        //    if (timeForQuestion <= 0)
+        //    {
+        //        timerRunning = false;
+        //        TimesUp();
+        //    }
+        //}
+
         if (timerRunning)
         {
             if (timeForQuestion <= (playSoundAt + 1.0f) && !audioSource.isPlaying)
