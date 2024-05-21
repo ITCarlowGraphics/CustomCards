@@ -4,22 +4,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Instantiate_Card : MonoBehaviour
+public class Custom_Card : MonoBehaviour
 {
-    private static Instantiate_Card instance;
+    private static Custom_Card instance;
     Canvas canvas;
 
-    public static Instantiate_Card Instance
+    public static Custom_Card Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<Instantiate_Card>();
+                instance = FindObjectOfType<Custom_Card>();
                 if (instance == null)
                 {
-                    GameObject singletonObject = new GameObject(typeof(Instantiate_Card).Name);
-                    instance = singletonObject.AddComponent<Instantiate_Card>();
+                    GameObject singletonObject = new GameObject(typeof(Custom_Card).Name);
+                    instance = singletonObject.AddComponent<Custom_Card>();
                 }
             }
             return instance;
@@ -107,34 +107,33 @@ public class Instantiate_Card : MonoBehaviour
     }
 
     public void createImage(
-        string parentName, // parent GameObject
-        string imageName, // image for the image object
-        string xPosition, string yPosition, // X and Y positions
-        string width, string height, // Width and height
-        string rotation, // Rotation
-        string imageSource, // Image source (sprite name)
-        string imageColor, // Image color
-        string imageMaterial // Image material (optional)
+        string parentName, // parent name
+        string imageName, // image name
+        string xPosition, string yPosition, // x,y positions
+        string width, string height, // width and height of the image
+        string rotation, // rotation 
+        string imageSource, // image source 
+        string imageColor, // color of image
+        string imageMaterial, // material to use
+        bool attachImageBehaviours = false, // to use the script
+        bool enableImageSwap = false, // enable image swapping
+        string image1Name = null, string image2Name = null, float swapInterval = 0.5f, // properties for swap image behaviour
+        bool enableColorChange = false, // enable color changing
+        string startColor = null, string endColor = null, float colorChangeDuration = 1.0f // properties for color changing 
         )
     {
-        // Find the parent GameObject
         GameObject parent = GameObject.Find(parentName);
         if (parent != null)
         {
-            // Create a new GameObject for the image
             GameObject newImageObject = new GameObject(imageName);
             newImageObject.transform.SetParent(parent.transform);
 
-            // Set RectTransform properties
             RectTransform rectTransform = newImageObject.AddComponent<RectTransform>();
             rectTransform.anchoredPosition = new Vector2(float.Parse(xPosition), float.Parse(yPosition));
             rectTransform.sizeDelta = new Vector2(float.Parse(width), float.Parse(height));
             rectTransform.localRotation = Quaternion.Euler(0, 0, float.Parse(rotation));
 
-            // Add Image component
             Image imageComponent = newImageObject.AddComponent<Image>();
-
-            // Set image source (sprite)
             Sprite sprite = Resources.Load<Sprite>($"Textures/{imageSource}");
             if (sprite != null)
             {
@@ -145,11 +144,9 @@ public class Instantiate_Card : MonoBehaviour
                 Debug.LogError($"Image source '{imageSource}' not found in Resources/Textures!");
             }
 
-            // Set image color
             Color color = ParseColorString(imageColor);
             imageComponent.color = color;
 
-            // Set image material (optional)
             if (!string.IsNullOrEmpty(imageMaterial))
             {
                 Material material = Resources.Load<Material>($"Materials/{imageMaterial}");
@@ -161,6 +158,20 @@ public class Instantiate_Card : MonoBehaviour
                 {
                     Debug.LogError($"Material '{imageMaterial}' not found in Resources/Materials!");
                 }
+            }
+
+            if (attachImageBehaviours)
+            {
+                ImageBehaviours imageBehaviours = newImageObject.AddComponent<ImageBehaviours>();
+                imageBehaviours.enableImageSwap = enableImageSwap;
+                imageBehaviours.image1 = !string.IsNullOrEmpty(image1Name) ? Resources.Load<Sprite>($"Textures/{image1Name}") : null;
+                imageBehaviours.image2 = !string.IsNullOrEmpty(image2Name) ? Resources.Load<Sprite>($"Textures/{image2Name}") : null;
+                imageBehaviours.swapInterval = swapInterval;
+
+                imageBehaviours.enableColorChange = enableColorChange;
+                imageBehaviours.startColor = ParseColorString(startColor);
+                imageBehaviours.endColor = ParseColorString(endColor);
+                imageBehaviours.colorChangeDuration = colorChangeDuration;
             }
         }
         else
@@ -245,60 +256,115 @@ public class Instantiate_Card : MonoBehaviour
         }
     }
 
-    public void createAnimatedImage(
-        string parentName, // parent GameObject
-        string animationName, // Name for the new animation GameObject
-        string xPosition, string yPosition, // Initial X and Y positions
+    public void createButton(
+        string parentName, // Parent GameObject
+        string buttonName, // Name for the new button GameObject
+        string xPosition, string yPosition, // X and Y positions
         string width, string height, // Width and height
         string rotation, // Rotation
-        string imageSource, // Image source (sprite name)
-        string imageColor, // Image color
-        float moveSpeed, // Movement speed
-        string movePattern // Movement pattern (e.g. linear, zigzag, circular)
+        string buttonText, // Text content for the button
+        string textColor, // Text color
+        string fontName, // Font name
+        int fontSize, // Font size
+        bool isBold, // Bold text
+        bool isItalic, // Italic text
+        string buttonImage, // Button image source
+        string highlightColor, // Button highlight color
+        UnityEngine.Events.UnityAction onClickAction // Action to call on button click
         )
     {
         // Find the parent GameObject
         GameObject parent = GameObject.Find(parentName);
         if (parent != null)
         {
-            // Create a new GameObject for the image
-            GameObject newImageObject = new GameObject(animationName);
-            newImageObject.transform.SetParent(parent.transform);
+            // Create a new GameObject for the button
+            GameObject newButtonObject = new GameObject(buttonName);
+            newButtonObject.transform.SetParent(parent.transform);
 
             // Set RectTransform properties
-            RectTransform rectTransform = newImageObject.AddComponent<RectTransform>();
+            RectTransform rectTransform = newButtonObject.AddComponent<RectTransform>();
             rectTransform.anchoredPosition = new Vector2(float.Parse(xPosition), float.Parse(yPosition));
             rectTransform.sizeDelta = new Vector2(float.Parse(width), float.Parse(height));
             rectTransform.localRotation = Quaternion.Euler(0, 0, float.Parse(rotation));
 
             // Add Image component
-            Image imageComponent = newImageObject.AddComponent<Image>();
+            Image buttonImageComponent = newButtonObject.AddComponent<Image>();
 
-            // Set image source (sprite)
-            Sprite sprite = Resources.Load<Sprite>($"Textures/{imageSource}");
+            // Set button image source (sprite)
+            Sprite sprite = Resources.Load<Sprite>($"Textures/{buttonImage}");
             if (sprite != null)
             {
-                imageComponent.sprite = sprite;
+                buttonImageComponent.sprite = sprite;
             }
             else
             {
-                Debug.LogError($"Image source '{imageSource}' not found in Resources/Textures!");
+                Debug.LogError($"Image source '{buttonImage}' not found in Resources/Textures!");
             }
 
-            // Set image color
-            Color color = ParseColorString(imageColor);
-            imageComponent.color = color;
+            // Add Button component
+            Button buttonComponent = newButtonObject.AddComponent<Button>();
 
-            // Add and configure animation component
-            AnimatedImage animatedImage = newImageObject.AddComponent<AnimatedImage>();
-            animatedImage.moveSpeed = moveSpeed;
-            animatedImage.movePattern = movePattern;
+            // Set button highlight color
+            ColorBlock colorBlock = buttonComponent.colors;
+            colorBlock.highlightedColor = ParseColorString(highlightColor);
+            buttonComponent.colors = colorBlock;
+
+            // Add TextMeshProUGUI component for button text
+            GameObject buttonTextObject = new GameObject("Text");
+            buttonTextObject.transform.SetParent(newButtonObject.transform);
+
+            // Set RectTransform properties for text
+            RectTransform textRectTransform = buttonTextObject.AddComponent<RectTransform>();
+            textRectTransform.anchoredPosition = Vector2.zero;
+            textRectTransform.sizeDelta = rectTransform.sizeDelta;
+            textRectTransform.localRotation = Quaternion.identity;
+
+            // Add TextMeshProUGUI component
+            TextMeshProUGUI textComponent = buttonTextObject.AddComponent<TextMeshProUGUI>();
+            textComponent.text = buttonText;
+            textComponent.color = ParseColorString(textColor);
+
+            TMP_FontAsset font = Resources.Load<TMP_FontAsset>($"Fonts/{fontName}");
+            if (font != null)
+            {
+                textComponent.font = font;
+            }
+            else
+            {
+                Debug.LogError($"Font '{fontName}' not found in Resources/Fonts!");
+            }
+
+            textComponent.fontSize = fontSize;
+            textComponent.alignment = TextAlignmentOptions.Center;
+            textComponent.enableAutoSizing = false;
+
+            // Set font style
+            if (isBold && isItalic)
+            {
+                textComponent.fontStyle = FontStyles.Bold | FontStyles.Italic;
+            }
+            else if (isBold)
+            {
+                textComponent.fontStyle = FontStyles.Bold;
+            }
+            else if (isItalic)
+            {
+                textComponent.fontStyle = FontStyles.Italic;
+            }
+            else
+            {
+                textComponent.fontStyle = FontStyles.Normal;
+            }
+
+            // Add the onClick listener
+            buttonComponent.onClick.AddListener(onClickAction);
         }
         else
         {
             Debug.LogError($"Parent GameObject '{parentName}' not found!");
         }
     }
+
 
     public void createAnimation(
         string parentName, // parent GameObject

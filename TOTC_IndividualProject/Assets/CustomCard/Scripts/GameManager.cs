@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-  
+    private ButtonHandler buttonHandler;
+
     void Start()
     {
-        InstantiatePrefabInCanvas();
+        buttonHandler = gameObject.AddComponent<ButtonHandler>();
 
-        //CreateCustomImage();
+        //InstantiatePrefabInCanvas();
+
+        CreateCustomImage();
         //CreateCustomText();
-
+        //CreateCustomButton();
         //CreateAnimation();
 
         //SetupTimerSound();
+
     }
 
     private void InstantiatePrefabInCanvas()
@@ -28,11 +32,12 @@ public class GameManager : MonoBehaviour
         // H_Theme_Question Card
 
         // Can choose between 2 colors RGB and HEX code, demonstration below it needs to be that format
-        //RGB,255,100,255,
-        //#1949c2
-        //Fonts - Nunito Bold, AIW
+        // RGB,255,100,255,
+        // #1949c2
+        // Fonts - Nunito Bold, AIW, Nightcore
+        // Sound - 20-second-timer-v3, beam-wowowfast, moo-death
 
-        Instantiate_Card.Instance.createCard(
+        Custom_Card.Instance.createCard(
             "CC_Default_Question Card", // Name of preset card
              "1", // Layout
             "RGB,0,0,0,", // Background color
@@ -53,23 +58,59 @@ public class GameManager : MonoBehaviour
 
     private void CreateCustomImage()
     {
-        Instantiate_Card.Instance.createImage(
+        Custom_Card.Instance.createImage(
             "Canvas", // Parent name
-            "Image with material", // Image name
-            "0", "200", // Position
-            "800", "350", // Size
+            "Custom image", // Image name
+            "0", "100", // Position
+            "400", "150", // Size
             "0", // Rotation
-            "Rectangle 424", // Image source
+            "MadPenguin", // Image source
             "#FFFFFF", // Image color
             "" // Image material (optional)
+            );
+
+        Custom_Card.Instance.createImage(
+            "Canvas", // parent name 
+            "Custom Image With Behaviors", // image name
+            "0", "400", // positions
+            "800", "350", // witdh and height
+            "0", // rotation
+            "MadPenguin", // image source
+            "#FFFFFF", // image color
+            "", // material
+            true, // Attach ImageBehaviours script
+            true, // Enable image swapping
+            "Ellipse13", "Ellipse14", 1.0f, // Image swap parameters
+            true, // Enable color changing
+            "#FFFFFF", "#FF0000", 2.0f // Color change parameters
             );
 
         //Instantiate_Card.Instance.createImage("Question Card", "CustomImage", "0", "200", "400", "120", "0", "Rectangle 424", "#FFFFFF", "");
     }
 
+    private void CreateCustomButton()
+    {
+        Custom_Card.Instance.createButton(
+            "Canvas", // Parent GameObject name
+            "Custom Button", // Button name
+            "100", "100", // Position
+            "300", "100", // Size
+            "0", // Rotation
+            "Click Me", // Button text
+            "#FFFFFF", // Text color
+            "Nunito Bold", // Font name
+            40, // Font size
+            true, // Bold
+            false, // Italic
+            "Rectangle 424", // Button image source
+            "#FF0000", // Highlight color
+            buttonHandler.OnCustomButtonClick // OnClick action
+        );
+    }
+
     private void CreateCustomText()
     {
-        Instantiate_Card.Instance.createText(
+        Custom_Card.Instance.createText(
             "Question Card", // Parent name
             "CustomText", // Text name
             "100", "100", // Position
@@ -89,7 +130,7 @@ public class GameManager : MonoBehaviour
     private void CreateAnimation()
     {
         // Create animation with zigzag movement goes up and down
-        Instantiate_Card.Instance.createAnimation(
+        Custom_Card.Instance.createAnimation(
             "Question Card", // Parent name
             "zig zag animation", // animation name
             "-350", "500", // Initial position
@@ -103,7 +144,7 @@ public class GameManager : MonoBehaviour
         );
 
         // Create an animation with vertical movement
-        Instantiate_Card.Instance.createAnimation(
+        Custom_Card.Instance.createAnimation(
             "Question Card", // Parent name
             "Vertical animation", // animation name
             "200", "500", // Initial position
@@ -117,7 +158,7 @@ public class GameManager : MonoBehaviour
         );
 
         // Create an animation with horizontal movement
-        Instantiate_Card.Instance.createAnimation(
+        Custom_Card.Instance.createAnimation(
             "Question Card", // Parent name
             "Horizontal animation", // animation name
             "0", "300", // Initial position
@@ -131,7 +172,7 @@ public class GameManager : MonoBehaviour
         );
 
         // Create an animation with Circular movement
-        Instantiate_Card.Instance.createAnimation(
+        Custom_Card.Instance.createAnimation(
             "Question Card", // Parent name
             "Circuly animation", // animation name
             "250", "300", // Initial position
@@ -145,7 +186,7 @@ public class GameManager : MonoBehaviour
         );
 
         // Create an animation with scaling effect
-        Instantiate_Card.Instance.createAnimation(
+        Custom_Card.Instance.createAnimation(
             "Question Card", // Parent name
             "Scaling animation", // animation name
             "0", "200", // Initial position
@@ -159,7 +200,7 @@ public class GameManager : MonoBehaviour
         );
 
         // Create an animation with jump scare effect
-        Instantiate_Card.Instance.createAnimation(
+        Custom_Card.Instance.createAnimation(
             "Question Card", // Parent name
             "JumpScare animation", // animation name
             "0", "0", // Initial position
