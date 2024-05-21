@@ -4,21 +4,40 @@ using UnityEngine;
 
 public class ButtonHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnCustomButtonClick()
     {
-        Debug.Log("Custom button clicked!");
+        // Find the ButtonEffects component on the same GameObject and call its OnButtonClick method
+        GameObject buttonGameObject = gameObject;
+        Debug.Log(gameObject);
 
+        ButtonEffects clickEffect = buttonGameObject.GetComponent<ButtonEffects>();
+
+        if (clickEffect != null)
+        {
+            clickEffect.OnButtonClick();
+        }
+        else
+        {
+            Debug.LogError("ButtonEffects component not found on this GameObject!");
+        }
+    }
+
+    public void onButtonClickCreateAnimation()
+    {
+        Debug.Log("ANIMATION APPEARS");
+
+        Custom_Card.Instance.createAnimation(
+            "Canvas", // Parent name
+            "zig zag animation", // animation name
+            "-350", "500", // Initial position
+            "100", "100", // Size
+            "0", // Rotation
+            "Bat", // Image source
+            "#FFFFFF", // Image color
+            3.0f, // Move speed
+            "zigzag", // Move pattern
+            1 // Quantity
+        );
     }
 }

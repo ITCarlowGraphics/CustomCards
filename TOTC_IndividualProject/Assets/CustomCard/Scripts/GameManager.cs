@@ -10,14 +10,14 @@ public class GameManager : MonoBehaviour
     {
         buttonHandler = gameObject.AddComponent<ButtonHandler>();
 
-        //InstantiatePrefabInCanvas();
+        InstantiatePrefabInCanvas();
 
-        CreateCustomImage();
+        //CreateCustomImage();
         //CreateCustomText();
         //CreateCustomButton();
         //CreateAnimation();
 
-        //SetupTimerSound();
+        SetupTimerSound();
 
     }
 
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         // Sound - 20-second-timer-v3, beam-wowowfast, moo-death
 
         Custom_Card.Instance.createCard(
-            "CC_Default_Question Card", // Name of preset card
+            "H_Theme_Question Card", // Name of preset card
              "1", // Layout
             "RGB,0,0,0,", // Background color
             "#ffffff", "Nunito Bold", // Subject text
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
             "100", "100", // Position
             "300", "100", // Size
             "0", // Rotation
-            "Click Me", // Button text
+            "Click Me to pop", // Button text
             "#FFFFFF", // Text color
             "Nunito Bold", // Font name
             40, // Font size
@@ -104,8 +104,54 @@ public class GameManager : MonoBehaviour
             false, // Italic
             "Rectangle 424", // Button image source
             "#FF0000", // Highlight color
-            buttonHandler.OnCustomButtonClick // OnClick action
-        );
+            //buttonHandler.OnCustomButtonClick // OnClick action
+            () => {
+                GameObject button = GameObject.Find("Custom Button");
+                ButtonHandler buttonHandler = button.GetComponent<ButtonHandler>();
+                buttonHandler.OnCustomButtonClick();
+            } // OnClick action
+            );
+
+        Custom_Card.Instance.createButton(
+            "Canvas", // Parent GameObject name
+            "Custom Button 2", // Button name
+            "100", "-200", // Position
+            "300", "100", // Size
+            "0", // Rotation
+            "Click Me for animation", // Button text
+            "#FFFFFF", // Text color
+            "Nunito Bold", // Font name
+            40, // Font size
+            true, // Bold
+            false, // Italic
+            "Rectangle 424", // Button image source
+            "#FF0000", // Highlight color
+            //buttonHandler.onButtonClickCreateAnimation // OnClick action
+            () => {
+                GameObject button = GameObject.Find("Custom Button 2");
+                ButtonHandler buttonHandler = button.GetComponent<ButtonHandler>();
+                buttonHandler.onButtonClickCreateAnimation();
+                buttonHandler.OnCustomButtonClick();
+            } // OnClick action
+            );
+
+        Custom_Card.Instance.createButton(
+            "Canvas", // Parent GameObject name
+            "Custom Button 2", // Button name
+            "100", "-200", // Position
+            "300", "100", // Size
+            "0", // Rotation
+            "Click Me for animation", // Button text
+            "#FFFFFF", // Text color
+            "Nunito Bold", // Font name
+            40, // Font size
+            true, // Bold
+            false, // Italic
+            "Rectangle 424", // Button image source
+            "#FF0000", // Highlight color
+            //buttonHandler.onButtonClickCreateAnimation // OnClick action
+            CreateCustomImage
+            );
     }
 
     private void CreateCustomText()

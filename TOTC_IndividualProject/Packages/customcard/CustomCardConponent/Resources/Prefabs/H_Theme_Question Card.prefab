@@ -1423,8 +1423,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Body of random question based on subject rolled
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e3ab87eac46b3664c9ce3456ac07fb87, type: 2}
-  m_sharedMaterial: {fileID: -5628367216675046375, guid: e3ab87eac46b3664c9ce3456ac07fb87, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9d62a700d68cf364faf317019df6c4f5, type: 2}
+  m_sharedMaterial: {fileID: 1902095869211371033, guid: 9d62a700d68cf364faf317019df6c4f5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2435,9 +2435,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d0a0ab75b4fa54a929646f9289dcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableImageSwap: 0
-  image1: {fileID: 21300000, guid: d994fd6f9222a4d489040f178d1b2670, type: 3}
-  image2: {fileID: 21300000, guid: ac649a41969c7af42b7e73f20e37abc6, type: 3}
+  enableImageSwap: 1
+  image1: {fileID: 21300000, guid: f9459986eeb432d42a23e14b2b38d39c, type: 3}
+  image2: {fileID: 21300000, guid: da30d20cdbdc83d4abc97c31db90f74d, type: 3}
   swapInterval: 0.5
   enableColorChange: 0
   startColor: {r: 1, g: 1, b: 1, a: 1}

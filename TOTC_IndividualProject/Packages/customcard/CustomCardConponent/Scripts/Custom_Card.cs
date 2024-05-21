@@ -257,19 +257,19 @@ public class Custom_Card : MonoBehaviour
     }
 
     public void createButton(
-        string parentName, // Parent GameObject
-        string buttonName, // Name for the new button GameObject
-        string xPosition, string yPosition, // X and Y positions
-        string width, string height, // Width and height
-        string rotation, // Rotation
-        string buttonText, // Text content for the button
-        string textColor, // Text color
-        string fontName, // Font name
-        int fontSize, // Font size
-        bool isBold, // Bold text
-        bool isItalic, // Italic text
-        string buttonImage, // Button image source
-        string highlightColor, // Button highlight color
+        string parentName,
+        string buttonName,
+        string xPosition, string yPosition,
+        string width, string height,
+        string rotation,
+        string buttonText,
+        string textColor,
+        string fontName,
+        int fontSize,
+        bool isBold,
+        bool isItalic,
+        string buttonImage,
+        string highlightColor,
         UnityEngine.Events.UnityAction onClickAction // Action to call on button click
         )
     {
@@ -356,7 +356,13 @@ public class Custom_Card : MonoBehaviour
                 textComponent.fontStyle = FontStyles.Normal;
             }
 
-            // Add the onClick listener
+            // Attach ButtonHandler script
+            ButtonHandler buttonHandler = newButtonObject.AddComponent<ButtonHandler>();
+
+            // Attach ButtonEffects script
+            ButtonEffects clickEffect = newButtonObject.AddComponent<ButtonEffects>();
+
+            // Add the onClick listener to ButtonHandler
             buttonComponent.onClick.AddListener(onClickAction);
         }
         else
@@ -364,7 +370,6 @@ public class Custom_Card : MonoBehaviour
             Debug.LogError($"Parent GameObject '{parentName}' not found!");
         }
     }
-
 
     public void createAnimation(
         string parentName, // parent GameObject
