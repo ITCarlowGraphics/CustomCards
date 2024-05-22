@@ -257,19 +257,19 @@ public class Custom_Card : MonoBehaviour
     }
 
     public void createButton(
-        string parentName,
-        string buttonName,
-        string xPosition, string yPosition,
-        string width, string height,
-        string rotation,
-        string buttonText,
-        string textColor,
-        string fontName,
-        int fontSize,
-        bool isBold,
-        bool isItalic,
-        string buttonImage,
-        string highlightColor,
+        string parentName, // name of parent
+        string buttonName, // name of button
+        string xPosition, string yPosition, // x,y positions
+        string width, string height, // width and height
+        string rotation, // rotation
+        string buttonText, // the buttons text
+        string textColor, // text color
+        string fontName, // text font
+        int fontSize, // text size
+        bool isBold, // text being bold
+        bool isItalic, // text being italic
+        string buttonImage, // buttom image source
+        string highlightColor, // hightlight color
         UnityEngine.Events.UnityAction onClickAction // Action to call on button click
         )
     {

@@ -2,22 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManagerTest : MonoBehaviour
 {
-    private ButtonHandler buttonHandler;
 
     void Start()
     {
-        buttonHandler = gameObject.AddComponent<ButtonHandler>();
-
         InstantiatePrefabInCanvas();
 
         //CreateCustomImage();
         //CreateCustomText();
         //CreateCustomButton();
         //CreateAnimation();
-
-        SetupTimerSound();
+        //SetupTimerSound();
 
     }
 
@@ -38,7 +34,7 @@ public class GameManager : MonoBehaviour
         // Sound - 20-second-timer-v3, beam-wowowfast, moo-death
 
         Custom_Card.Instance.createCard(
-            "H_Theme_Question Card", // Name of preset card
+            "CC_Default_Question Card", // Name of preset card
              "1", // Layout
             "RGB,0,0,0,", // Background color
             "#ffffff", "Nunito Bold", // Subject text
@@ -93,8 +89,8 @@ public class GameManager : MonoBehaviour
         Custom_Card.Instance.createButton(
             "Canvas", // Parent GameObject name
             "Custom Button", // Button name
-            "100", "100", // Position
-            "300", "100", // Size
+            "0", "100", // Position
+            "400", "200", // Size
             "0", // Rotation
             "Click Me to pop", // Button text
             "#FFFFFF", // Text color
@@ -116,7 +112,7 @@ public class GameManager : MonoBehaviour
             "Canvas", // Parent GameObject name
             "Custom Button 2", // Button name
             "100", "-200", // Position
-            "300", "100", // Size
+            "400", "200", // Size
             "0", // Rotation
             "Click Me for animation", // Button text
             "#FFFFFF", // Text color
@@ -137,11 +133,11 @@ public class GameManager : MonoBehaviour
 
         Custom_Card.Instance.createButton(
             "Canvas", // Parent GameObject name
-            "Custom Button 2", // Button name
-            "100", "-200", // Position
-            "300", "100", // Size
+            "Custom Button 3", // Button name
+            "100", "-400", // Position
+            "400", "200", // Size
             "0", // Rotation
-            "Click Me for animation", // Button text
+            "Click Me for create image", // Button text
             "#FFFFFF", // Text color
             "Nunito Bold", // Font name
             40, // Font size
